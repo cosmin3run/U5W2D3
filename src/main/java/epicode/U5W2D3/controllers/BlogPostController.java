@@ -1,5 +1,6 @@
 package epicode.U5W2D3.controllers;
 
+import epicode.U5W2D3.Payloads.NewBlogPostPayload;
 import epicode.U5W2D3.entities.BlogPost;
 import epicode.U5W2D3.services.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 public class BlogPostController {
     @Autowired
-    private BlogPostService blogPostService;
+    BlogPostService blogPostService;
 
     //Get All BlogPosts
     @GetMapping
@@ -36,10 +37,10 @@ public class BlogPostController {
     //Save BlogPost
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BlogPost saveBlogPost(@RequestBody BlogPost newBlogPost) {return this.blogPostService.saveBlogPost(newBlogPost);}
+    public BlogPost saveBlogPost(@RequestBody NewBlogPostPayload newBlogPost) {return this.blogPostService.saveBlogPost(newBlogPost);}
 
     @PutMapping("/{id}")
-    public BlogPost findByAndUpdate(@PathVariable UUID id, @RequestBody BlogPost updatedBlogPost){
+    public BlogPost findByAndUpdate(@PathVariable UUID id, @RequestBody NewBlogPostPayload updatedBlogPost){
         return this.blogPostService.findByIdAndUpdate(id, updatedBlogPost);
     }
 

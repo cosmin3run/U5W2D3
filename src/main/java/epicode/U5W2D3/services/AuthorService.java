@@ -2,6 +2,7 @@ package epicode.U5W2D3.services;
 
 import epicode.U5W2D3.DAO.AuthorDAO;
 import epicode.U5W2D3.entities.Author;
+import epicode.U5W2D3.exceptions.BadRequestException;
 import epicode.U5W2D3.exceptions.NotFoundException;
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class AuthorService {
     public Author saveAuthor(Author newAuthor) {
 
         if(this.authorsDAO.existsByEmail(newAuthor.getEmail())){
-            throw new RuntimeException("Author with email " + newAuthor.getEmail() + " already exists");
+            throw new BadRequestException("Author with email " + newAuthor.getEmail() + " already exists");
         } else {
+            newAuthor.setAvatar("https://ui-avatars.com/api/?name=" + newAuthor.getName().charAt(0) + "+" + newAuthor.getSurname().charAt(0));
             authorsDAO.save(newAuthor);
             return newAuthor;
         }

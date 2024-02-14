@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/author")
 public class AuthorController {
     @Autowired
-    private AuthorService authorService;
+    AuthorService authorService;
 
     @GetMapping
     public List<Author> getAuthors() {return this.authorService.getAuthors();}

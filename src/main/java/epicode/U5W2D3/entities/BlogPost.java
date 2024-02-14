@@ -25,6 +25,7 @@ public class BlogPost {
     private int readTime;
 
     @ManyToOne
+    @JoinColumn(name = "authorId")
     private Author author;
 
 
